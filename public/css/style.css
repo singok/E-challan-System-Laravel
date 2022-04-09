@@ -1,0 +1,132 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* header */
+.front-row {
+    height: 160px;
+    padding: 20px;
+    width: 100%;
+    background-color: rgb(19, 19, 94);
+}
+
+.item {
+    float: left;
+    width: 30%;
+    padding: 10px;
+}
+
+.gov-title {
+    text-align:center;
+    width: 40%;
+    height: 130px;
+}
+.web-address {
+    color: white;
+    font-size: 15px;
+}
+.title {
+    margin-top: 12px;
+}
+
+.logos {
+    height: 110px;
+    width: 110px;
+}
+
+.flag-logo {
+    text-align:right;
+}
+
+.welcome-message {
+    font-size: 20px;
+    color: white;
+}
+
+
+/* signin page */
+.sign-in {
+    margin:0 auto;
+    width: 380px;
+    border: 1px solid;
+    border-radius: 25px;
+    padding: 45px 30px;
+}
+
+.sign-in input {
+    padding: 13px 13px;
+}
+.sign-in input:focus {
+    background-color: rgb(245, 245, 245);
+    box-shadow: none;
+}
+
+#title-signin {
+    font-size: 30px;
+}
+
+.signin-logo {
+    float: right;
+    margin-top: -35px;
+    height: 110px;
+    width: 110px;
+}
+
+.sign-in button {
+    color: white;
+    border-radius: 30px;
+    width: 100%;
+    background-color: rgb(37, 155, 90);
+    border: none;
+    padding: 13px 0px;
+}
+
+.sign-in button:hover {
+    background-color: rgb(108, 207, 153);
+}
+
+.forget-password {
+    color: red;
+}
+.forget-password:hover {
+    color: rgb(28, 40, 196);
+    text-decoration: none;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.admin-login {
+    color: green;
+}
+.admin-login:hover {
+    color: rgb(19, 23, 226);
+    text-decoration: none;
+}
+
+
+/* verification */
+.verification-box {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.verification-box input:focus {
+    box-shadow: none;
+}
+
+.printable-search {
+    border-radius: 25px;
+    padding: 10px 20px;
+    background-color: rgb(55, 121, 219);
+    color: white;
+    border: none;
+}
+
+.printable-search:hover {
+    background-color: rgb(112, 119, 221);
+}
