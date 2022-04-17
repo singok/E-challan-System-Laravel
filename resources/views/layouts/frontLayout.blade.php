@@ -44,13 +44,19 @@
         <div class="d-flex flex-wrap">
           <ul class="nav me-auto">
             <li class="nav-item"><a href="{{ route('rulepage') }}" class="nav-link link-dark px-2 active" aria-current="page">Rules</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">link1</a></li>
             <li class="nav-item"><a href="{{ route('verificationpage') }}" class="nav-link link-dark px-2">Verification</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">link3</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">link4</a></li>
+            <li class="nav-item"><a href="{{ route('challanpage') }}" class="nav-link link-dark px-2">Challan</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Link</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Link</a></li>
           </ul>
           <ul class="nav">
-            <li class="nav-item"><a href="{{ route('trafficlogin') }}" class="nav-link link-dark px-2">Login</a></li>
+
+            @if(session()->has('username'))
+              <li class="nav-item"><a href="{{ route('trafficlogout') }}" class="nav-link link-dark px-2" id="logout-red">Logout</a></li>
+            @else
+              <li class="nav-item"><a href="{{ route('trafficlogin') }}" class="nav-link link-dark px-2" id="login-blue">Login</a></li>
+            @endif
+            
           </ul>
         </div>
       </nav>

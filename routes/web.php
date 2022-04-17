@@ -56,3 +56,11 @@ Route::get('/traffic-login', [FrontController::class, 'trafficLogin'])->name('tr
 Route::get('/admin-login', [FrontController::class, 'adminLogin'])->name('adminlogin');
 Route::get('/admin-password-forget', [FrontController::class, 'adminForget'])->name('adminforget');
 Route::get('/traffic-password-forget', [FrontController::class, 'trafficForget'])->name('trafficforget');
+
+// front Authentication
+Route::post('/traffic-login/check', [FrontController::class, 'verifyTraffic'])->name('checkTraffic');
+Route::get('/traffic/logout', [FrontController::class, 'logoutTraffic'])->name('trafficlogout');
+
+Route::middleware(['challanCheck'])->group(function() {
+    Route::get('/challan', [FrontController::class, 'challanPage'])->name('challanpage');
+});

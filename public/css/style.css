@@ -70,7 +70,7 @@
 
 .signin-logo {
     float: right;
-    margin-top: -35px;
+    margin-top: -22px;
     height: 110px;
     width: 110px;
 }
@@ -129,4 +129,20 @@
 
 .printable-search:hover {
     background-color: rgb(112, 119, 221);
+}
+
+
+/* challan page */
+.form-label {
+    font-weight: lighter;
+}
+
+/* logout */
+#logout-red:hover {
+    color:red;
+}
+
+/* login */
+#login-blue:hover {
+    color:rgb(24, 175, 87);
 }
