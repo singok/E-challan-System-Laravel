@@ -47,7 +47,6 @@
             <li class="nav-item"><a href="{{ route('verificationpage') }}" class="nav-link link-dark px-2">Verification</a></li>
             <li class="nav-item"><a href="{{ route('challanpage') }}" class="nav-link link-dark px-2">Challan</a></li>
             <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Link</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Link</a></li>
           </ul>
           <ul class="nav">
 
