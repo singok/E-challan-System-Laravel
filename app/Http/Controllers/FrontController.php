@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\TrafficRules;
 use App\Models\Challan;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Province;
+use App\Models\Vehicle;
 
 class FrontController extends Controller
 {
@@ -110,7 +112,99 @@ class FrontController extends Controller
     // display challan page
     function challanPage() 
     {
-        return view('front.challan');
+        // get province data 
+        $provinceData = Province::select('name')->distinct()->get();
+
+        // get vehicle data
+        $vehicleData = Vehicle::select('category')->get();
+
+        // get rules data
+        $rulesData = TrafficRules::select('rule_description')->get();
+
+        return view('front.challan', ['dataInfo' => $provinceData, 'vehicleInfo' => $vehicleData, 'rulesInfo' => $rulesData]);
+    }
+
+    // challan details insert
+    function submitChallan(Request $request)
+    {
+        // validate
+        $request->validate([
+            'inputFirstName' => 'required',
+            'inputLastName' => 'required'
+
+        ]);
+
+        $challan = new Challan();
+
+        // personal detail
+        $challan->fname = $request->inputFirstName;
+        $challan->mname = $request->inputMiddleName;
+        $challan->lname = $request->inputLastName;
+        $challan->gender = $request->inputGender;
+        $challan->address = $request->inputAddress;
+        $challan->province = $request->inputProvince;
+        $challan->district = $request->inputDistrict;
+        $challan->email = $request->inputEmail;
+        $challan->phone = $request->inputMobile;
+        $challan->occupation = $request->inputOccupation;
+        $challan->health_condition = $request->inputHealthCondition;
+        $challan->disability = $request->inputDisability;
+
+        // vehicle detail
+        $challan->model = $request->inputModel;
+        $challan->category = $request->inputCategory;
+        $challan->engine_no = $request->inputEngineNo;
+        $challan->color = $request->inputColor;
+        $challan->power = $request->inputPower;
+
+        // fine fillup
+        $challan->driving_license = $request->inputLicenseNo;
+        $challan->passenger_no = $request->inputPassengerNo;
+        $challan->place = $request->inputPlace;
+        $challan->time = $request->inputTime;
+        $challan->police_brit = $request->inputPoliceGate;
+        $challan->fine_reason = $request->inputReason;
+
+        $challan->save();
+
+        if($challan) {
+            echo "Challan Registered Successfully";
+        } else {
+            echo "Couldn't register challan";
+        }
+    }
+
+    // display district
+    function displayDistrict(Request $request)
+    {
+        // get district names
+        $data = DB::table('province')->select('district')->where('name', $request->province)->get();
+
+        $value = "";
+        if($data) {
+            $value .="<option value='' selected>Choose...</option>";
+            foreach($data as $val) {
+                $value .= "<option value='".$val->district."'>".$val->district."</option>";
+            }
+            echo $value;
+        } else {
+            echo $value;
+        }
+    }
+
+    // display category details
+    function displayCategoryDetails(Request $request)
+    {
+        // get district names
+        $data = DB::table('vehicle')->select('details')->where('category', $request->category)->first();
+
+        $value = "";
+        if($data) {
+            $value .= $data->details;
+            echo $value;
+        } else {
+            echo $value;
+        }
     }
 
     // display traffic login page

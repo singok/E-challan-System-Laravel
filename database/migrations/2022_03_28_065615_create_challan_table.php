@@ -14,10 +14,36 @@ return new class extends Migration
     public function up()
     {
         Schema::create('challan', function (Blueprint $table) {
-            $table->string('driving_license')->unique();
-            $table->string('full_name');
-            $table->string('contact_no')->unique();
-            $table->string('file');
+            $table->increments('id');
+
+            // personal details
+            $table->string('fname');
+            $table->string('mname')->nullable();
+            $table->string('lname');
+            $table->string('gender');
+            $table->string('address');
+            $table->string('province');
+            $table->string('district');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('occupation');
+            $table->string('health_condition');
+            $table->string('disability');
+
+            // vehicle details
+            $table->string('model');
+            $table->string('category');
+            $table->string('engine_no');
+            $table->string('color');
+            $table->string('power');
+
+            // form fill-up
+            $table->string('driving_license');
+            $table->string('passenger_no');
+            $table->string('place');
+            $table->string('time');
+            $table->string('police_brit');
+            $table->string('fine_reason');
             $table->timestamps();
         });
     }

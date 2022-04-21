@@ -64,3 +64,8 @@ Route::get('/traffic/logout', [FrontController::class, 'logoutTraffic'])->name('
 Route::middleware(['challanCheck'])->group(function() {
     Route::get('/challan', [FrontController::class, 'challanPage'])->name('challanpage');
 });
+
+// challan part
+Route::post('/challan/load-district', [FrontController::class, 'displayDistrict'])->name('loadDistrict');
+Route::post('/challan/load-categoryDetails', [FrontController::class, 'displayCategoryDetails'])->name('loadCategoryDetails');
+Route::post('/challan/form-submit',[FrontController::class, 'submitChallan'])->name('challanSubmit');

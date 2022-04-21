@@ -7,10 +7,11 @@
 @section('content')
 
 <div class="alert alert-info" role="alert">
-    Please, fill all the details carefully !
+    Note :- Fields with <span style="color:red;">*</span> are mandatory.
   </div>
   
-  <form action="#">
+  <form>
+    @csrf
     <div class="row g-3">
       <div class="row mb-4 g-3">
         <div class="col-md-6">
@@ -22,21 +23,21 @@
     
               <div class="row g-3">
                 <div class="col-md-4">
-                  <label for="inputFirstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="inputFirstName" name="firstName">
+                  <label for="inputFirstName" class="form-label">First Name <span style="color:red;">*</span></label>
+                  <input type="text" class="form-control" id="inputFirstName" name="inputFirstName">
                 </div>
                 <div class="col-md-4">
                   <label for="inputMiddleName" class="form-label">Middle Name</label>
-                  <input type="text" class="form-control" id="inputMiddleName" name="middleName">
+                  <input type="text" class="form-control" id="inputMiddleName" name="inputMiddleName">
                 </div>
                 <div class="col-md-4">
-                  <label for="inputLastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="inputLastName" name="lastName">
+                  <label for="inputLastName" class="form-label">Last Name <span style="color:red;">*</span></label>
+                  <input type="text" class="form-control" id="inputLastName" name="inputLastName">
                 </div>
               </div>
               <div class="col-12">
                 <div class="col-md-12 py-2">
-                  <label for="inputGender" class="form-label">Gender</label>
+                  <label for="inputGender" class="form-label">Gender <span style="color:red;">*</span></label>
                   <select id="inputGender" class="form-select" name="inputGender">
                     <option value="" selected>Choose...</option>
                     <option value="male">Male</option>
@@ -46,78 +47,81 @@
               </div>
               <div class="row g-3 py-2">
                 <div class="col-md-4">
-                  <label for="inputAddress" class="form-label">Address</label>
+                  <label for="inputAddress" class="form-label">Address <span style="color:red;">*</span></label>
                 <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="1234 Main St">
                 </div>
                 <div class="col-md-4">
-                  <label for="inputProvince" class="form-label">Province</label>
-                  <select id="inputProvince" class="form-select">
+                  <label for="inputProvince" class="form-label">Province <span style="color:red;">*</span></label>
+                  <select id="inputProvince" class="form-select" name="inputProvince">
                     <option value="" selected>Choose...</option>
-                    <option value="Province No. 1">Province No. 1</option>
+                    
+                    @foreach ($dataInfo as $info)
+                      <option value="{{ $info->name }}">{{ $info->name }}</option>
+                    @endforeach
+                    
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <label for="inputState" class="form-label">District</label>
-                  <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
+                  <label for="inputDistrict" class="form-label">District <span style="color:red;">*</span></label>
+                  <select id="inputDistrict" class="form-select" name="inputDistrict">
+                    <!-- district goes here -->
                   </select>
                 </div>
               </div>
               
               <div class="col-12 py-2">
-                <label for="inputEmail" class="form-label">Email Address</label>
+                <label for="inputEmail" class="form-label">Email Address <span style="color:red;">*</span></label>
                 <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="abc@gmail.com">
               </div>
               <div class="row g-3 py-2">
                 <div class="col-md-6">
-                  <label for="inputMobile" class="form-label">Mobile No.</label>
+                  <label for="inputMobile" class="form-label">Mobile No. <span style="color:red;">*</span></label>
                   <input type="number" class="form-control" id="inputMobile" name="inputMobile" placeholder="98########">
                 </div>
                 <div class="col-md-6">
-                  <label for="inputOccupation" class="form-label">Occupation</label>
+                  <label for="inputOccupation" class="form-label">Occupation <span style="color:red;">*</span></label>
                   <input type="text" class="form-control" id="inputOccupation" name="inputOccupation">
                 </div>
               </div>
               <div class="row g-3 py-4">
                 <div class="col-md-6">
                   <h5 class="pb-0 mb-2 fst-regular">
-                    Select Health Conditions
+                    Select Health Conditions <span style="color:red;">*</span>
                   </h5>
                   <hr>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="inpuHealthCondition" value="Normal" id="flexCheckNormal">
+                    <input class="form-check-input" type="checkbox" name="inputHealthCondition" value="Normal" id="flexCheckNormal">
                     <label class="form-check-label" for="flexCheckNormal">
                       Normal Health Condition
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="inpuHealthCondition" value="Blood Pressure" id="flexCheckPressure">
+                    <input class="form-check-input" type="checkbox" name="inputHealthCondition" value="Blood Pressure" id="flexCheckPressure">
                     <label class="form-check-label" for="flexCheckPressure">
                       Blood Pressure (HIGH/LOW)
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="inpuHealthCondition" value="Heart Disease" id="flexCheckHeart">
+                    <input class="form-check-input" type="checkbox" name="inputHealthCondition" value="Heart Disease" id="flexCheckHeart">
                     <label class="form-check-label" for="flexCheckHeart">
                       Heart Disease
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="inpuHealthCondition" value="Kidney Disease" id="flexCheckKidney">
+                    <input class="form-check-input" type="checkbox" name="inputHealthCondition" value="Kidney Disease" id="flexCheckKidney">
                     <label class="form-check-label" for="flexCheckKidney">
                       Chronic Kidney Disease
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="inpuHealthCondition" value="Tuberculosis" id="flexCheckIB">
+                    <input class="form-check-input" type="checkbox" name="inputHealthCondition" value="Tuberculosis" id="flexCheckIB">
                     <label class="form-check-label" for="flexCheckTB">
                       Tuberculosis (TB)
                     </label>
                   </div>
                   
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="inpuHealthCondition" value="Other" id="flexCheckOther">
+                    <input class="form-check-input" type="checkbox" name="inputHealthCondition" value="Other" id="flexCheckOther">
                     <label class="form-check-label" for="flexCheckOther">
                       Other
                     </label>
@@ -125,7 +129,7 @@
                 </div>
                 <div class="col-md-6">
                   <h5 class="pb-0 mb-2 fst-regular">
-                    Disability
+                    Disability <span style="color:red;">*</span>
                   </h5>
                   <hr>
                   <div class="form-check">
@@ -153,35 +157,36 @@
                 <hr>
                 <div class="row g-3">
                   <div class="col-md-4">
-                    <label for="inputPlateNo" class="form-label">Plate No.</label>
-                    <input type="email" class="form-control" id="inputPlateNo" name="inputPlateNo">
+                    <label for="inputModel" class="form-label">Model <span style="color:red;">*</span></label>
+                    <input type="text" class="form-control" id="inputModel" name="inputModel">
                   </div>
                   <div class="col-md-4">
-                    <label for="inputVehicleType" class="form-label">Vehicle Type</label>
-                    <select id="inputVehicleType" class="form-select" name="inputVehicleType">
-                      <option selected>Choose...</option>
-                      <option>A</option>
-                      <option>B</option>
-                      <option>C</option>
-                      <option>D</option>
+                    <label for="inputCategory" class="form-label">Category <span style="color:red;">*</span></label>
+                    <select id="inputCategory" class="form-select" name="inputCategory">
+
+                      <option value="" selected>Choose...</option>
+                      @foreach ($vehicleInfo as $vehicleData)
+                        <option value='{{ $vehicleData->category }}'>{{ $vehicleData->category }}</option>
+                      @endforeach
+
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label for="inputModel" class="form-label">Model</label>
-                    <input type="text" class="form-control" id="inputModel" name="inputModel">
+                    <label for="inputCategoryDetails" class="form-label">Category Details</label>
+                    <input type="text" class="form-control" id="inputCategoryDetails">
                   </div>
                 </div>
                 <div class="row g-3 py-2">
                   <div class="col-md-4">
-                    <label for="inputEngineNo" class="form-label">Engine No.</label>
+                    <label for="inputEngineNo" class="form-label">Engine No. <span style="color:red;">*</span></label>
                     <input type="text" class="form-control" id="inputEngineNo" name="inputEngineNo">
                   </div>
                   <div class="col-md-4">
-                    <label for="inputColor" class="form-label">Color</label>
-                    <input type="text" class="form-control" id="inputColor" input="inputColor">
+                    <label for="inputColor" class="form-label">Color <span style="color:red;">*</span></label>
+                    <input type="text" class="form-control" id="inputColor" name="inputColor">
                   </div>
                   <div class="col-md-4">
-                    <label for="inputPower" class="form-label">Power</label>
+                    <label for="inputPower" class="form-label">Power <span style="color:red;">*</span></label>
                     <input type="text" class="form-control" id="inputPower" name="inputPower">
                   </div>
                 </div>
@@ -190,39 +195,43 @@
                 <hr>
                   <div class="row g-3">
                     <div class="col-md-6">
-                      <label for="inputLicenseNo" class="form-label">Driving License No.</label>
+                      <label for="inputLicenseNo" class="form-label">Driving License No. <span style="color:red;">*</span></label>
                       <input type="text" class="form-control" id="inputLicenseNo" name="inputLicenseNo">
                     </div>
                     <div class="col-md-6">
-                      <label for="inputPassengerNo" class="form-label">No. of Passengers</label>
+                      <label for="inputPassengerNo" class="form-label">No. of Passengers <span style="color:red;">*</span></label>
                       <input type="number" class="form-control" id="inputPassengerNo" name="inputPassengerNo">
                     </div>
                   </div>
                   <div class="row g-3 py-2">
                     <div class="col-md-6">
-                      <label for="inputPlace" class="form-label">Place</label>
+                      <label for="inputPlace" class="form-label">Place <span style="color:red;">*</span></label>
                       <input type="text" class="form-control" id="inputPlace" name="inputPlace">
                     </div>
                     <div class="col-md-6">
-                      <label for="inputTime" class="form-label">Time</label>
+                      <label for="inputTime" class="form-label">Time <span style="color:red;">*</span></label>
                       <input type="text" class="form-control" id="inputTime" name="inputTime">
                     </div>
                   </div>
                   <div class="row g-3 py-2">
                     <div class="col-md-12">
-                      <label for="inputPoliceGate" class="form-label">Police Gate</label>
+                      <label for="inputPoliceGate" class="form-label">Police Gate <span style="color:red;">*</span></label>
                       <select id="inputPoliceGate" class="form-select" name="inputPoliceGate">
                         <option selected>Choose...</option>
-                        <option>...</option>
+                        <option value="Chabahil">Chabahil</option>
                       </select>
                     </div>
                   </div>
                   <div class="row g-3 py-2">
                     <div class="col-md-12">
-                      <label for="inputReason" class="form-label">Reason for fine</label>
+                      <label for="inputReason" class="form-label">Reason for fine <span style="color:red;">*</span></label>
                       <select id="inputReason" class="form-select" name="inputReason">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+
+                        <option value="" selected>Choose...</option>
+                        @foreach ($rulesInfo as $rulesData)
+                          <option value='{{ $rulesData->rule_description }}'>{{ $rulesData->rule_description }}</option>
+                        @endforeach
+
                       </select>
                     </div>
                   </div>
@@ -236,5 +245,53 @@
       </div>
     </div>
   </form>
+
+  <script>
+    $(document).ready(function() {
+      
+      // get province value
+      $('#inputProvince').on('change', function() {
+        let province = $(this).val();
+        $.ajax({
+          url : "{{ route('loadDistrict') }}",
+          type : "POST",
+          data : {province:province, _token: '{{csrf_token()}}' },
+          success : function (data) {
+            $('#inputDistrict').html(data);
+          }
+        });
+      });
+
+      // get category details
+      $('#inputCategory').on('change', function() {
+        let category = this.value;
+        $.ajax({
+          url : "{{ route('loadCategoryDetails') }}",
+          type : "POST",
+          data : {category:category, _token: '{{csrf_token()}}' },
+          success : function (data) {
+              $('#inputCategoryDetails').val(data);
+          }
+        });
+      });
+
+      // form submit
+      $('form').on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+          url : "{{ route('challanSubmit') }}",
+          type : "POST",
+          data : $('form').serialize(),
+          success : function (data) {
+            alert(data);
+            $('form')[0].reset();
+          }
+        });
+
+      });
+
+    });
+  </script>
 
 @endsection
