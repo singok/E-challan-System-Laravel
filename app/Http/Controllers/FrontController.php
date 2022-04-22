@@ -26,7 +26,7 @@ class FrontController extends Controller
     {
         $search = $request['driving_license'] ?? "";
 
-        $data = DB::table('challan')->where('driving_license', '=', $search)->first();
+        $data = DB::table('challan')->select('fname','mname','lname','driving_license','address','province','phone')->where('driving_license', '=', $search)->first();
         if($data) {
             $message = "";
             $value = '
@@ -49,10 +49,13 @@ class FrontController extends Controller
                                                     Full Name
                                                 </th>
                                                 <th>
-                                                    Phone No.
+                                                    Address
                                                 </th>
                                                 <th>
-                                                    Challan
+                                                    Province
+                                                </th>
+                                                <th>
+                                                    Phone No.
                                                 </th>
                                                 <th>
                                                     Action
@@ -67,22 +70,26 @@ class FrontController extends Controller
                                                     .'
                                                     </td>
                                                     <td>'.
-                                                        $data->full_name
+                                                        $data->fname." ".$data->mname." ".$data->lname
                                                     .'
                                                     </td>
                                                     <td>'.
-                                                        $data->contact_no
+                                                        $data->address
                                                     .'
                                                     </td>
                                                     <td>'.
-                                                        $data->file
+                                                        $data->province
+                                                    .'
+                                                    </td>
+                                                    <td>'.
+                                                        $data->phone
                                                     .'
                                                     </td>
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                                            <a href="'.asset("echallans").'/'.$data->file.'" download><button
+                                                            <a href="#"><button
                                                                     type="button"
-                                                                    class="btn btn-success btn-rounded btn-fw">Download</button></a>
+                                                                    class="btn btn-primary btn-rounded btn-fw">Show more</button></a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -129,48 +136,73 @@ class FrontController extends Controller
     {
         // validate
         $request->validate([
-            'inputFirstName' => 'required',
-            'inputLastName' => 'required'
-
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'province' => 'required',
+            'district' => 'required',
+            'email' => 'required | email',
+            'phoneNumber' => 'required',
+            'occupation' => 'required',
+            'disability' => 'required',
+            'model' => 'required',
+            'category' => 'required',
+            'engineNo' => 'required',
+            'color' => 'required',
+            'power' => 'required',
+            'licenseNo' => 'required',
+            'passengerCount' => 'required',
+            'place' => 'required',
+            'time' => 'required',
+            'policeGate' => 'required',
+            'reason' => 'required'
         ]);
-
+        
         $challan = new Challan();
-
+       
         // personal detail
-        $challan->fname = $request->inputFirstName;
-        $challan->mname = $request->inputMiddleName;
-        $challan->lname = $request->inputLastName;
-        $challan->gender = $request->inputGender;
-        $challan->address = $request->inputAddress;
-        $challan->province = $request->inputProvince;
-        $challan->district = $request->inputDistrict;
-        $challan->email = $request->inputEmail;
-        $challan->phone = $request->inputMobile;
-        $challan->occupation = $request->inputOccupation;
-        $challan->health_condition = $request->inputHealthCondition;
-        $challan->disability = $request->inputDisability;
+        $challan->fname = $request->firstName;
+        $challan->mname = $request->middleName;
+        $challan->lname = $request->lastName;
+        $challan->gender = $request->gender;
+        $challan->address = $request->address;
+        $challan->province = $request->province;
+        $challan->district = $request->district;
+        $challan->email = $request->email;
+        $challan->phone = $request->phoneNumber;
+        $challan->occupation = $request->occupation;
+        $challan->health_condition = $request->healthCondition;
+        $challan->disability = $request->disability;
 
         // vehicle detail
-        $challan->model = $request->inputModel;
-        $challan->category = $request->inputCategory;
-        $challan->engine_no = $request->inputEngineNo;
-        $challan->color = $request->inputColor;
-        $challan->power = $request->inputPower;
+        $challan->model = $request->model;
+        $challan->category = $request->category;
+        $challan->engine_no = $request->engineNo;
+        $challan->color = $request->color;
+        $challan->power = $request->power;
 
         // fine fillup
-        $challan->driving_license = $request->inputLicenseNo;
-        $challan->passenger_no = $request->inputPassengerNo;
-        $challan->place = $request->inputPlace;
-        $challan->time = $request->inputTime;
-        $challan->police_brit = $request->inputPoliceGate;
-        $challan->fine_reason = $request->inputReason;
+        $challan->driving_license = $request->licenseNo;
+        $challan->passenger_no = $request->passengerCount;
+        $challan->place = $request->place;
+        $challan->time = $request->time;
+        $challan->police_brit = $request->policeGate;
+        $challan->fine_reason = $request->reason;
+        
+        // fine amount
+        $fine = DB::table('trafficrules')->select('penalty_point')->where('rule_description', $request->reason)->first();
+        $challan->fine_amount = $fine->penalty_point;
+
+        // police name
+        $challan->traffic_name = session('username');
 
         $challan->save();
 
         if($challan) {
-            echo "Challan Registered Successfully";
+            return back()->with('success','Challan registered successfully !');
         } else {
-            echo "Couldn't register challan";
+            return back()->with('failure','Something went wrong !');
         }
     }
 
@@ -245,7 +277,7 @@ class FrontController extends Controller
          if($userInfo) {
             // password check
             if(Hash::check($request['user_password'], $userInfo->user_password)) {
-                $request->session()->put('username', $userInfo->firstname);
+                $request->session()->put('username', $userInfo->firstname." ".$userInfo->lastname);
                 return redirect()->route('challanpage');
             } else {
                 return back()->with('failure', "You have entered incorrect password !");

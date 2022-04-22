@@ -44,6 +44,10 @@ return new class extends Migration
             $table->string('time');
             $table->string('police_brit');
             $table->string('fine_reason');
+
+            // filled by
+            $table->string('traffic_name');
+
             $table->timestamps();
         });
     }

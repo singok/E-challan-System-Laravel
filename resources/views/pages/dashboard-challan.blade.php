@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Session;
 
 @extends('layouts.dash')
 
-@push('title')
+@section('title')
     <title>Challans</title>
-@endpush
+@endsection
 
-@push('search')
+@section('search')
     <form action="{{ route('admin.challan-show') }}">
         @csrf
         <input type="search" name="search" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search"
             aria-describedby="search">
     </form>
-@endpush
+@endsection
 
 @section('contents')
     <div class="row">
@@ -45,10 +45,13 @@ use Illuminate\Support\Facades\Session;
                                         Full Name
                                     </th>
                                     <th>
-                                        Phone No.
+                                        Address
                                     </th>
                                     <th>
-                                        Challan
+                                        Province
+                                    </th>
+                                    <th>
+                                        Phone
                                     </th>
                                     <th>
                                         Action
@@ -63,23 +66,24 @@ use Illuminate\Support\Facades\Session;
                                             {{ $info->driving_license }}
                                         </td>
                                         <td>
-                                            {{ $info->full_name }}
+                                            {{ $info->fname." ".$info->mname." ".$info->lname }}
                                         </td>
                                         <td>
-                                            {{ $info->contact_no }}
+                                            {{ $info->address }}
                                         </td>
                                         <td>
-                                            {{ $info->file }}
+                                            {{ $info->province }}
+                                        </td>
+                                        <td>
+                                            {{ $info->phone }}
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a href="{{ asset('echallans') . '/' . $info->file }}" download><button
+                                                <a href="#"><button
                                                         type="button"
-                                                        class="btn btn-success btn-rounded btn-fw">Download</button></a>
-                                                <a
-                                                    href="{{ route('admin.challan-delete', ['license' => $info->driving_license]) }}"><button
-                                                        type="button"
-                                                        class="btn btn-danger btn-rounded btn-fw">Delete</button></a>
+                                                        class="btn btn-primary btn-rounded btn-fw">Show more</button></a>
+                                                <a href="{{ route('admin.challan-delete', ['license' => $info->driving_license]) }}"><button
+                                                        type="button" class="btn btn-danger btn-rounded btn-fw">Delete</button></a>
                                             </div>
                                         </td>
                                     </tr>

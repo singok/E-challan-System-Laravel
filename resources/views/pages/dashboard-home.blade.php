@@ -1,8 +1,8 @@
 @extends('layouts.dash')
 
-@push('title')
+@section('title')
     <title>Dashboard</title>
-@endpush
+@endsection
 
 @section('contents')
     <div class="row">

@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Session;
 
 @extends('layouts.dash')
 
-@push('title')
+@section('title')
     <title>Setting</title>
-@endpush
+@endsection
 
 @section('contents')
     <div class="content-wrapper d-flex align-items-center auth px-0">

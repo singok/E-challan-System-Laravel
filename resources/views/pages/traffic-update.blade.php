@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Session;
 
 @extends('layouts.dash')
 
-@push('title')
+@section('title')
     <title>Edit Traffic Police</title>
-@endpush
+@endsection
 
 @section('contents')
     <div class="row">

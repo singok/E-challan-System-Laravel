@@ -34,7 +34,7 @@
     @error('user_id')
         {{ $message }}
     @enderror
-</div>
+  </div>
   <div class="mb-4">
     <label for="formGroupExampleInput2" class="form-label">Password</label>
     <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Enter your password" name="user_password">

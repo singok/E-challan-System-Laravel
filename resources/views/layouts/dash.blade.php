@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    @stack('title')
+    @yield('title')
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
@@ -66,7 +66,7 @@
                                     <i class="icon-search"></i>
                                 </span>
                             </div>
-                            @stack('search')
+                            @yield('search')
                         </div>
                     </li>
                 </ul>
@@ -115,6 +115,11 @@
                                         href="{{ route('admin.traffic-register') }}">Traffic Police</a></li>
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('admin.rules-register') }}">Traffic Rules</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('admin.province-add') }}">Province & district</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('admin.vehicle-add') }}">Vehicle Category</a></li>
+
                             </ul>
                         </div>
                     </li>

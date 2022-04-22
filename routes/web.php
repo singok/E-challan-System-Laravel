@@ -6,6 +6,8 @@ use App\Http\Controllers\TrafficController;
 use App\Http\Controllers\TrashController;
 use App\Http\Controllers\ChallanController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\ProvinceController;
 
 
 Route::post('/admin/check', [AdminController::class, 'check'])->name('admin.check');
@@ -28,6 +30,15 @@ Route::get('/admin/displayTrafficPolice', [TrafficController::class, 'listTraffi
 
 Route::post('/admin/addTrafficPolice/register', [TrafficController::class, 'registerPolice'])->name('traffic_police_add');
 Route::post('/admin/addTrafficRules/register', [TrafficController::class, 'registerRules'])->name('traffic_rules_add');
+
+// vehicle category
+Route::get('/admin/VehicleCategory/show', [VehicleController::class, 'showVehicleForm'])->name('admin.vehicle-add');
+Route::post('/admin/VehicleCategory/add', [VehicleController::class, 'addVehicle'])->name('admin.vehicle-register');
+
+// province and district
+Route::get('/admin/province-district/add', [ProvinceController::class, 'showProvinceForm'])->name('admin.province-add');
+Route::post('/admin/district/register', [ProvinceController::class, 'addDistrict'])->name('admin.district-register');
+
 Route::get('/admin/displayTrafficRules', [TrafficController::class, 'listTrafficRules'])->name('admin.rules-display');
 
 Route::get('/admin/traffic-delete/{id}', [TrafficController::class, 'deleteTraffic'])->name('admin.traffic-delete');
@@ -68,4 +79,4 @@ Route::middleware(['challanCheck'])->group(function() {
 // challan part
 Route::post('/challan/load-district', [FrontController::class, 'displayDistrict'])->name('loadDistrict');
 Route::post('/challan/load-categoryDetails', [FrontController::class, 'displayCategoryDetails'])->name('loadCategoryDetails');
-Route::post('/challan/form-submit',[FrontController::class, 'submitChallan'])->name('challanSubmit');
+Route::get('/challan/form-submit',[FrontController::class, 'submitChallan'])->name('challanSubmit');

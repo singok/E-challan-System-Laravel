@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Session;
 
 @extends('layouts.dash')
 
-@push('title')
+@section('title')
     <title>Trash bin</title>
-@endpush
+@endsection
 
-@push('search')
+@section('search')
     <form action="{{ route('admin.trash') }}">
         @csrf
         <input type="search" name="search" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search"
             aria-describedby="search">
     </form>
-@endpush
+@endsection
 
 @section('contents')
     <div class="row">

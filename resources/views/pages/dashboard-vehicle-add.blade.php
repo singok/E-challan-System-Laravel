@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Session;
 @extends('layouts.dash')
 
 @section('title')
-    <title>Add Traffic Rules</title>
+    <title>Add Vehicle Category</title>
 @endsection
 
 @section('contents')
@@ -21,38 +21,28 @@ use Illuminate\Support\Facades\Session;
                             {{ Session::get('failure') }}
                         </div>
                     @endif
-                    <h4 class="card-title">Add Traffic Rules</h4>
+                    <h4 class="card-title">Add Vehicle Category with details</h4>
                     <p class="card-description">
-                        Please, add traffic rules details carefully !<br>
                     <div class="alert alert-warning">
                         NOTE :- All fields are mandatory.
                     </div>
                     </p>
-                    <form class="forms-sample" method="POST" action="{{ route('traffic_rules_add') }}">
+                    <form class="forms-sample" method="POST" action="{{ route('admin.vehicle-register') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="exampleInputRule1">Rule No.</label>
-                            <input type="number" class="form-control" id="exampleInputRule1" name="rule_no">
+                            <label for="exampleInputCategory">Category</label>
+                            <input type="text" class="form-control" id="exampleInputCategory" name="category">
                             <div class="alert-danger">
-                                @error('rule_no')
+                                @error('category')
                                     {{ $message }}
                                 @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleTextarea1">Rule Description</label>
-                            <textarea class="form-control" id="exampleTextarea1" rows="4" name="rule_description"></textarea>
+                            <label for="exampleInputDetails">Category Details</label>
+                            <textarea class="form-control" id="exampleInputDetails" rows="4" name="categoryDetails"></textarea>
                             <div class="alert-danger">
-                                @error('rule_description')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPoint3">Penalty Point (Rs)</label>
-                            <input type="number" class="form-control" id="exampleInputPoint3" name="penalty_point">
-                            <div class="alert-danger">
-                                @error('penalty_point')
+                                @error('categoryDetails')
                                     {{ $message }}
                                 @enderror
                             </div>
