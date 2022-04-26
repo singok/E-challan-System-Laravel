@@ -38,6 +38,14 @@ Route::post('/admin/VehicleCategory/add', [VehicleController::class, 'addVehicle
 // province and district
 Route::get('/admin/province-district/add', [ProvinceController::class, 'showProvinceForm'])->name('admin.province-add');
 Route::post('/admin/district/register', [ProvinceController::class, 'addDistrict'])->name('admin.district-register');
+Route::post('/admin/province/register', [ProvinceController::class, 'addProvince'])->name('admin.province-register');
+Route::get('/admin/province&district/display', [ProvinceController::class, 'displayProvinceDistrict'])->name('admin.province-display');
+Route::get('/admin/province-delete/{id}', [ProvinceController::class, 'deleteProvince'])->name('admin.province-delete-permanent');
+Route::get('/admin/province-updateform/{id}', [ProvinceController::class, 'updateProvinceForm'])->name('admin.province-edit');
+Route::post('/admin/province-edit/{pid}', [ProvinceController::class, 'provinceUpdate'])->name('province_name_update');
+
+
+
 
 Route::get('/admin/displayTrafficRules', [TrafficController::class, 'listTrafficRules'])->name('admin.rules-display');
 

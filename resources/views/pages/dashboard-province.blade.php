@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Session;
         <div class="card-header" role="tab" id="heading-4">
           <h6 class="mb-0">
             <a data-bs-toggle="collapse" href="#collapse-4" aria-expanded="true" aria-controls="collapse-4" class="">
-                <h4>Add District</h4>
+                <h4>Do you want to add district ?</h4>
             </a>
           </h6>
         </div>
@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Session;
                                             <option value="" selected>Choose...</option>
                                             
                                             @foreach ($dataInfo as $info)
-                                                <option value="{{ $info->name }}">{{ $info->name }}</option>
+                                                <option value="{{ $info->province }}">{{ $info->province }}</option>
                                             @endforeach
                       
                                         </select>
@@ -83,21 +83,38 @@ use Illuminate\Support\Facades\Session;
         <div class="card-header" role="tab" id="heading-5">
           <h6 class="mb-0">
             <a class="collapsed" data-bs-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
-              I can’t sign in to my account
+              Do you want to add province ?
             </a>
           </h6>
         </div>
-        <div id="collapse-5" class="collapse" role="tabpanel" aria-labelledby="heading-5" data-parent="#accordion-2">
+        <div id="collapse-4" class="collapse show" role="tabpanel" aria-labelledby="heading-4" data-parent="#accordion-2" style="">
           <div class="card-body">
-              <p>If while signing in to your account you see an error message, you can do the following</p>
-            <ol class="ps-3">
-              <li>Check your network connection and try again</li>
-              <li>Make sure your account credentials are correct while signing in</li>
-              <li>Check whether your account is accessible in your region</li>
-            </ol>
-            <br>
-            <i class="ti-alert-octagon me-2"></i>If the problem persists, you can contact our support.
-          </div>
+            <div class="alert alert-warning">
+                NOTE :- Enter province name.
+            </div>
+            </p>
+            <form class="forms-sample" method="POST" action="{{ route('admin.province-register') }}">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Province : </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="province_name" />
+                                <div class="alert-danger">
+                                    @error('province_name')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            </form>
+  </div>
         </div>
       </div>
      

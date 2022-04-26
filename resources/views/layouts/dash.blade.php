@@ -136,6 +136,10 @@
                                         href="{{ route('admin.traffic-display') }}">Traffic Police</a></li>
                                 <li class="nav-item"><a class="nav-link"
                                         href="{{ route('admin.rules-display') }}">Traffic Rules</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('admin.province-display') }}">Province & district</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('admin.vehicle-add') }}">Vehicle Category</a></li>
                                 <li class="nav-item"><a class="nav-link"
                                         href="{{ route('admin.challan-show') }}">Registerd Challans</a></li>
                             </ul>
