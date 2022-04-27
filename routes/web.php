@@ -35,6 +35,7 @@ Route::post('/admin/addTrafficRules/register', [TrafficController::class, 'regis
 Route::get('/admin/VehicleCategory/show', [VehicleController::class, 'showVehicleForm'])->name('admin.vehicle-add');
 Route::post('/admin/VehicleCategory/add', [VehicleController::class, 'addVehicle'])->name('admin.vehicle-register');
 
+
 // province and district
 Route::get('/admin/province-district/add', [ProvinceController::class, 'showProvinceForm'])->name('admin.province-add');
 Route::post('/admin/district/register', [ProvinceController::class, 'addDistrict'])->name('admin.district-register');
@@ -43,7 +44,16 @@ Route::get('/admin/province&district/display', [ProvinceController::class, 'disp
 Route::get('/admin/province-delete/{id}', [ProvinceController::class, 'deleteProvince'])->name('admin.province-delete-permanent');
 Route::get('/admin/province-updateform/{id}', [ProvinceController::class, 'updateProvinceForm'])->name('admin.province-edit');
 Route::post('/admin/province-edit/{pid}', [ProvinceController::class, 'provinceUpdate'])->name('province_name_update');
+Route::get('/admin/district-delete/{id}', [ProvinceController::class, 'deleteDistrict'])->name('admin.district-delete-permanent');
+Route::get('/admin/district-update/{id}', [ProvinceController::class, 'updateDistrictForm'])->name('admin.district-update');
+Route::post('/admin/district-edit/{id}', [ProvinceController::class, 'districtUpdate'])->name('district_name_update');
 
+
+// vehicle details
+Route::get('/admin/vehicle-list/display', [ProvinceController::class, 'showVehicle'])->name('admin.vehicle-list');
+Route::get('/admin/vehicle-delete/{id}', [ProvinceController::class, 'deleteVehicle'])->name('admin.vehicle-delete-permanently');
+Route::get('/admin/vehicle-detail/updateform/{id}', [ProvinceController::class, 'vehicleUpdateForm'])->name('admin.vehicle-detail-update');
+Route::post('/admin/vehicle/update/{id}', [ProvinceController::class, 'vechileUpdate'])->name('vehicle_details_update');
 
 
 

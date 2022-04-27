@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 @endsection
 
 @section('search')
-    <form action="#">
+    <form action="{{ route('admin.province-display') }}">
         @csrf
         <input type="search" name="search" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search"
             aria-describedby="search">
@@ -94,18 +94,16 @@ use Illuminate\Support\Facades\Session;
                                             {{ $info->district }}
                                         </td>
                                         <td>
-                                            <!--
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a
-                                                    href="{{ route('admin.traffic-rules-restore', ['id' => $info->id]) }}"><button
+                                                    href="{{ route('admin.district-update', ['id' => $info->id]) }}"><button
                                                         type="button"
-                                                        class="btn btn-success btn-rounded btn-fw">Restore</button></a>
+                                                        class="btn btn-dark btn-rounded btn-fw">Edit</button></a>
                                                 <a
-                                                    href="{{ route('admin.rule-delete-permanent', ['id' => $info->id]) }}"><button
+                                                    href="{{ route('admin.district-delete-permanent', ['id' => $info->id]) }}"><button
                                                         type="button"
                                                         class="btn btn-danger btn-rounded btn-fw">Delete</button></a>
                                             </div>
-                                        -->
                                         </td>
                                     </tr>
                                 @endforeach

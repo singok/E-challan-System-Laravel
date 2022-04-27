@@ -139,7 +139,7 @@
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('admin.province-display') }}">Province & district</a></li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('admin.vehicle-add') }}">Vehicle Category</a></li>
+                                        href="{{ route('admin.vehicle-list') }}">Vehicle Category</a></li>
                                 <li class="nav-item"><a class="nav-link"
                                         href="{{ route('admin.challan-show') }}">Registerd Challans</a></li>
                             </ul>

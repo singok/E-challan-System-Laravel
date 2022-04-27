@@ -65,13 +65,17 @@ class ProvinceController extends Controller
     }
 
     // list province and district
-    function displayProvinceDistrict()
+    function displayProvinceDistrict(Request $request)
     {
-        // province details
-        $data_province = DB::table('province')->select('pid','province')->SimplePaginate(5);
 
-        // district details
-        $data_district = DB::table('district')->select('id','district','province_id')->SimplePaginate(8);
+        $search = $request['search'] ?? "";
+        if($search == "") {
+            $data_province = DB::table('province')->select('pid','province')->SimplePaginate(5);
+            $data_district = DB::table('district')->select('id','district','province_id')->SimplePaginate(8);
+        } else {
+            $data_province = DB::table('province')->select('pid','province')->where('province', 'LIKE', "%$search%")->SimplePaginate(5);
+            $data_district = DB::table('district')->select('id','district','province_id')->where('district', 'LIKE', "%$search%")->SimplePaginate(8);
+        }
 
         return view('pages.dashboard-province-list', ['dataProvince' => $data_province, 'dataDistrict' => $data_district ]);
     }
@@ -96,7 +100,7 @@ class ProvinceController extends Controller
         return view('pages.dashboard-province-update', ['dataProvince' => $data]);
     }
 
-    // delete province detail
+    // update province detail
     function provinceUpdate($pid, Request $request)
     {
         $request->validate([
@@ -107,6 +111,93 @@ class ProvinceController extends Controller
         
         if($data) {
             return back()->with('success', "Province has been updated successfully !");
+        } else {
+            return back()->with('failure',"Something went wrong !");
+        }
+    }
+
+    // show district update form
+    function updateDistrictForm($id)
+    {
+        $data = DB::table('district')->where('id', $id)->first();
+
+        return view('pages.dashboard-district-update', ['dataDistrict' => $data]);
+    }
+
+    // update district details
+    function districtUpdate($id, Request $request)
+    {
+        $request->validate([
+            'district' => 'required | unique:district'
+        ]);
+
+        $data = DB::table('district')->where('id', '=', $id)->update(['district' => $request['district']]);
+        
+        if($data) {
+            return back()->with('success', "District has been updated successfully !");
+        } else {
+            return back()->with('failure',"Something went wrong !");
+        }
+    }
+
+    // delete district detail
+    function deleteDistrict($id)
+    {
+        $district = DB::table('district')->where('id', $id)->delete();
+
+        if($district) {
+            return back()->with('success', 'District deleted successfully !');
+        } else {
+            return back()->with('failure', 'Something went wrong !');
+        }
+    }
+
+    // show vehicle details
+    function showVehicle(Request $request)
+    {
+        $search = $request['search'] ?? "";
+
+        if( $search == "") {
+            $data = DB::table('vehicle')->select('cid','category', 'details')->SimplePaginate(8);
+        } else {
+            $data = DB::table('vehicle')->select('cid','category', 'details')->where('category', 'LIKE',"%$search%")->orwhere('details','LIKE',"%$search%")->SimplePaginate(8);
+        }
+
+        return view('pages.dashboard-vehicle-list', ['dataVehicle' => $data]);
+    }
+
+    // delete vehicle details
+    function deleteVehicle($id)
+    {
+        $data = DB::table('vehicle')->where('cid', $id)->delete();
+
+        if($data) {
+            return back()->with('success', 'Vehicle deleted successfully !');
+        } else {
+            return back()->with('failure', 'Something went wrong !');
+        }
+    }
+
+    // show vehicle update form
+    function vehicleUpdateForm($id)
+    {
+        $data = DB::table('vehicle')->where('cid', $id)->first();
+        
+        return view('pages.dashboard-vehicle-update', ['dataVehicle' => $data]);
+    }
+
+    // update vehicle details
+    function vechileUpdate($id, Request $request)
+    {
+        $request->validate([
+            'category' => 'required',
+            'details' => 'required'
+        ]);
+
+        $data = DB::table('vehicle')->where('cid', '=', $id)->update(['category' => $request['category'], 'details' => $request['details']]);
+        
+        if($data) {
+            return back()->with('success', "Category has been updated successfully !");
         } else {
             return back()->with('failure',"Something went wrong !");
         }
