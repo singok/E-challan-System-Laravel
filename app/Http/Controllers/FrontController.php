@@ -120,7 +120,7 @@ class FrontController extends Controller
     function challanPage() 
     {
         // get province data 
-        $provinceData = Province::select('name')->distinct()->get();
+        $provinceData = Province::select('province')->get();
 
         // get vehicle data
         $vehicleData = Vehicle::select('category')->get();
@@ -172,7 +172,14 @@ class FrontController extends Controller
         $challan->email = $request->email;
         $challan->phone = $request->phoneNumber;
         $challan->occupation = $request->occupation;
-        $challan->health_condition = $request->healthCondition;
+
+        // health condition
+        $val = "";
+        foreach($request->healthCondition as $data) {
+            $val .= $data.",";
+        }
+        $challan->health_condition = $val;
+
         $challan->disability = $request->disability;
 
         // vehicle detail
@@ -208,20 +215,29 @@ class FrontController extends Controller
 
     // display district
     function displayDistrict(Request $request)
-    {
-        // get district names
-        $data = DB::table('province')->select('district')->where('name', $request->province)->get();
-
+    {   
         $value = "";
-        if($data) {
-            $value .="<option value='' selected>Choose...</option>";
-            foreach($data as $val) {
-                $value .= "<option value='".$val->district."'>".$val->district."</option>";
+        if($request->province != "") {
+
+            // get province id 
+            $provinceID = DB::table('province')->select('pid')->where('province', $request->province)->first();
+
+            // get district names
+            $data = DB::table('district')->where('province_id', $provinceID->pid)->get();
+
+            
+            if($data) {
+                $value .="<option value='' selected>Choose...</option>";
+                foreach($data as $val) {
+                    $value .= "<option value='".$val->district."'>".$val->district."</option>";
+                }
+                echo $value;
             }
-            echo $value;
+
         } else {
             echo $value;
         }
+
     }
 
     // display category details

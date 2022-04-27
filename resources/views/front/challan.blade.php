@@ -9,12 +9,7 @@
 @endsection
 
 @section('content')
-
-<div class="alert alert-info" role="alert">
-    Note :- Fields with <span style="color:red;">*</span> are mandatory.
-  </div>
-  <form action="{{ route('challanSubmit') }}" method="GET">
-    @if (Session::get('success'))
+@if (Session::get('success'))
         <div class="alert alert-success">
             {{ Session::get('success') }}
         </div>
@@ -23,7 +18,10 @@
             {{ Session::get('failure') }}
         </div>
     @endif
-
+<div class="alert alert-info" role="alert">
+    Note :- Fields with <span style="color:red;">*</span> are mandatory.
+  </div>
+  <form action="{{ route('challanSubmit') }}" method="GET">
     @csrf
     <div class="row g-3">
       <div class="row mb-4 g-3">
@@ -91,7 +89,7 @@
                     <option value="" selected>Choose...</option>
                     
                     @foreach ($dataInfo as $info)
-                      <option value="{{ $info->name }}">{{ $info->name }}</option>
+                      <option value="{{ $info->province }}">{{ $info->province }}</option>
                     @endforeach
                     
                   </select>
@@ -150,38 +148,38 @@
                   </h5>
                   <hr>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="healthCondition" value="Normal" id="flexCheckNormal" checked>
+                    <input class="form-check-input" type="checkbox" name="healthCondition[]" value="Normal" id="flexCheckNormal" checked>
                     <label class="form-check-label" for="flexCheckNormal">
                       Normal Health Condition
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="healthCondition" value="Blood Pressure" id="flexCheckPressure">
+                    <input class="form-check-input" type="checkbox" name="healthCondition[]" value="Blood Pressure" id="flexCheckPressure">
                     <label class="form-check-label" for="flexCheckPressure">
                       Blood Pressure (HIGH/LOW)
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="healthCondition" value="Heart Disease" id="flexCheckHeart">
+                    <input class="form-check-input" type="checkbox" name="healthCondition[]" value="Heart Disease" id="flexCheckHeart">
                     <label class="form-check-label" for="flexCheckHeart">
                       Heart Disease
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="healthCondition" value="Kidney Disease" id="flexCheckKidney">
+                    <input class="form-check-input" type="checkbox" name="healthCondition[]" value="Kidney Disease" id="flexCheckKidney">
                     <label class="form-check-label" for="flexCheckKidney">
                       Chronic Kidney Disease
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="healthCondition" value="Tuberculosis" id="flexCheckIB">
+                    <input class="form-check-input" type="checkbox" name="healthCondition[]" value="Tuberculosis" id="flexCheckIB">
                     <label class="form-check-label" for="flexCheckTB">
                       Tuberculosis (TB)
                     </label>
                   </div>
                   
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="healthCondition" value="Other" id="flexCheckOther">
+                    <input class="form-check-input" type="checkbox" name="healthCondition[]" value="Other" id="flexCheckOther">
                     <label class="form-check-label" for="flexCheckOther">
                       Other
                     </label>
@@ -367,6 +365,7 @@
       // get province value
       $('#inputProvince').on('change', function() {
         let province = $(this).val();
+
         $.ajax({
           url : "{{ route('loadDistrict') }}",
           type : "POST",
