@@ -34,9 +34,9 @@ class FrontController extends Controller
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Challan Details</h4>
+                                <h4 class="card-title" style="color:blue;"><u><b>Challan Details</b></u></h4>
                                 <p class="card-description">
-                                    Please, kindly visit the office along with the hard copy of this document.
+                                    <i>Please, kindly visit the office along with the hard copy of this invoice.</i>
                                 </p>
                                 <div class="table-responsive">
                                     <table class="display table-striped expandable-table dataTable" style="width: 100%;" role="grid">
@@ -87,9 +87,9 @@ class FrontController extends Controller
                                                     </td>
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                                            <a href="#"><button
-                                                                    type="button"
-                                                                    class="btn btn-primary btn-rounded btn-fw">Show more</button></a>
+                                                            <a href="{{ route(\'invoice\') }}">
+                                                                <button type="button" class="printable-search">Show invoice</button>
+                                                            </a>
                                                         </div>
                                                     </td>
                                                 </tr>
