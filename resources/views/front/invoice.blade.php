@@ -1,260 +1,169 @@
-@extends('layouts.frontLayout')
+<!doctype html>
+<html lang="en">
 
-@section('title')
-  Invoice
-@endsection
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Invoice</title>
 
-@push('css')
-  <style>
-    body {
-  margin: 0;
-  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: .8125rem;
-  font-weight: 400;
-  line-height: 1.5385;
-  color: #333;
-  text-align: left;
-  background-color: #eee
-}
+  <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ asset('images/fornt-logo/nepal-govt.png') }}">
 
-.mt-50 {
-  margin-top: 50px
-}
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-.mb-50 {
-  margin-bottom: 50px
-}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-.card {
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, .125);
-  border-radius: .1875rem
-}
+</head>
 
-.card-img-actions {
-  position: relative
-}
-
-.card-body {
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  padding: 1.25rem;
-  text-align: center
-}
-
-.card-title {
-  margin-top: 10px;
-  font-size: 17px
-}
-
-.invoice-color {
-  color: red !important
-}
-
-.card-header {
-  padding: .9375rem 1.25rem;
-  margin-bottom: 0;
-  background-color: rgba(0, 0, 0, .02);
-  border-bottom: 1px solid rgba(0, 0, 0, .125)
-}
-
-a {
-  text-decoration: none !important
-}
-
-.btn-light {
-  color: #333;
-  background-color: #fafafa;
-  border-color: #ddd
-}
-
-.header-elements-inline {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap
-}
-
-@media (min-width: 768px) {
-  .wmin-md-400 {
-      min-width: 400px !important
-  }
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #2196f3
-}
-
-.btn-labeled>b {
-  position: absolute;
-  top: -1px;
-  background-color: blue;
-  display: block;
-  line-height: 1;
-  padding: .62503rem
-}
-  </style>
-@endpush
-
-@section('content')
-
-<div class="container d-flex justify-content-center mt-50 mb-50">
-  <div class="row">
-      <div class="col-md-12">
-          <div class="card">
-              <div class="card-header bg-transparent header-elements-inline">
-                  <h6 class="card-title">Sale invoice</h6>
-                  <div class="header-elements"> <button type="button" class="btn btn-light btn-sm"><i class="fa fa-file mr-2"></i> Save</button> <button type="button" class="btn btn-light btn-sm ml-3"><i class="fa fa-print mr-2"></i> Print</button> </div>
-              </div>
-              <div class="card-body">
-                  <div class="row">
-                      <div class="col-sm-6">
-                          <div class="mb-4 pull-left">
-                              <h6>BBBOOTSTRAP.COM</h6>
-                              <ul class="list list-unstyled mb-0 text-left">
-                                  <li>2269 Six Sigma</li>
-                                  <li>New york city</li>
-                                  <li>+1 474 44737 47 </li>
-                              </ul>
-                          </div>
-                      </div>
-                      <div class="col-sm-6">
-                          <div class="mb-4 ">
-                              <div class="text-sm-right">
-                                  <h4 class="invoice-color mb-2 mt-md-2">Invoice #BBB1243</h4>
-                                  <ul class="list list-unstyled mb-0">
-                                      <li>Date: <span class="font-weight-semibold">March 15, 2020</span></li>
-                                      <li>Due date: <span class="font-weight-semibold">March 30, 2020</span></li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="d-md-flex flex-md-wrap">
-                      <div class="mb-4 mb-md-2 text-left"> <span class="text-muted">Invoice To:</span>
-                          <ul class="list list-unstyled mb-0">
-                              <li>
-                                  <h5 class="my-2">Tibco Turang</h5>
-                              </li>
-                              <li><span class="font-weight-semibold">Samantha Mutual funds Ltd</span></li>
-                              <li>Gurung Street</li>
-                              <li>23 BB Lane</li>
-                              <li>Hong kong</li>
-                              <li>234 456 5678</li>
-                              <li><a href="#" data-abc="true">tibco@samantha.com</a></li>
-                          </ul>
-                      </div>
-                      <div class="mb-2 ml-auto"> <span class="text-muted">Payment Details:</span>
-                          <div class="d-flex flex-wrap wmin-md-400">
-                              <ul class="list list-unstyled mb-0 text-left">
-                                  <li>
-                                      <h5 class="my-2">Total Due:</h5>
-                                  </li>
-                                  <li>Bank name:</li>
-                                  <li>Country:</li>
-                                  <li>City:</li>
-                                  <li>Address:</li>
-                                  <li>IBAN:</li>
-                                  <li>SWIFT code:</li>
-                              </ul>
-                              <ul class="list list-unstyled text-right mb-0 ml-auto">
-                                  <li>
-                                      <h5 class="font-weight-semibold my-2">$1,090</h5>
-                                  </li>
-                                  <li><span class="font-weight-semibold">Hong Kong Bank</span></li>
-                                  <li>Hong Kong</li>
-                                  <li>Thurnung street, 21</li>
-                                  <li>New standard</li>
-                                  <li><span class="font-weight-semibold">98574959485</span></li>
-                                  <li><span class="font-weight-semibold">BHDHD98273BER</span></li>
-                              </ul>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="table-responsive">
-                  <table class="table table-lg">
-                      <thead>
-                          <tr>
-                              <th>Description</th>
-                              <th>Rate</th>
-                              <th>Hours</th>
-                              <th>Total</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr>
-                              <td>
-                                  <h6 class="mb-0">Arts and design template</h6> <span class="text-muted">in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Duis aute irure dolor in reprehenderit</span>
-                              </td>
-                              <td>$120</td>
-                              <td>180</td>
-                              <td><span class="font-weight-semibold">$300</span></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <h6 class="mb-0">Template for desnging the arts</h6> <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</span>
-                              </td>
-                              <td>$140</td>
-                              <td>100</td>
-                              <td><span class="font-weight-semibold">$240</span></td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <h6 class="mb-0">Technical support international</h6> <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</span>
-                              </td>
-                              <td>$250</td>
-                              <td>$250</td>
-                              <td><span class="font-weight-semibold">$500</span></td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-              <div class="card-body">
-                  <div class="d-md-flex flex-md-wrap">
-                      <div class="pt-2 mb-3 wmin-md-400 ml-auto">
-                          <h6 class="mb-3 text-left">Total due</h6>
-                          <div class="table-responsive">
-                              <table class="table">
-                                  <tbody>
-                                      <tr>
-                                          <th class="text-left">Subtotal:</th>
-                                          <td class="text-right">$1,090</td>
-                                      </tr>
-                                      <tr>
-                                          <th class="text-left">Tax: <span class="font-weight-normal">(25%)</span></th>
-                                          <td class="text-right">$27</td>
-                                      </tr>
-                                      <tr>
-                                          <th class="text-left">Total:</th>
-                                          <td class="text-right text-primary">
-                                              <h5 class="font-weight-semibold">$1,160</h5>
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                          <div class="text-right mt-3"> <button type="button" class="btn btn-primary"><b><i class="fa fa-paper-plane-o mr-1"></i></b> Send invoice</button> </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="card-footer"> <span class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Duis aute irure dolor in reprehenderit</span> </div>
+<body>
+    <div class="front-row">
+        <div class="item gov-logo">
+          <img src="{{ asset('images/fornt-logo/nepal-govt.png') }}" alt="logo" class="logos">
+        </div>
+    
+        <div class="item gov-title">
+          <div class="title">
+            <span class="welcome-message">नेपाल सरकारको आधिकारिक पोर्टल</span>
+            <br>
+            <span class="welcome-message">The Official Portal of Government of Nepal for e-Challan</span>
+            <br>
+            <span class="web-address">NEPALTRAFFIC.GOV.NP</span>
           </div>
+        </div>
+    
+        <div class="item flag-logo">
+          <img src="{{ asset('images/fornt-logo/R.png') }}" alt="logo" class="logos">
+        </div>
+    
       </div>
-  </div>
-</div>
+    
+      <div class="container d-flex justify-content-center mt-50 mb-50">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-4 pull-left">
+                                    <h6>OFFICE OF NEPAL TRAFFIC POLICE</h6>
+                                    <ul class="list list-unstyled mb-0 text-left">
+                                        <li>Singha Durbar</li>
+                                        <li>Kathmandu, Nepal</li>
+                                        <li>+977-1-4219641</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-4 ">
+                                    <div class="text-sm-right">
+                                        <h4 class="invoice-color mb-2 mt-md-2">Invoice #BBB1243</h4>
+                                        <ul class="list list-unstyled mb-0">
+                                            <li>Date: <span class="font-weight-semibold">{{ Carbon\Carbon::now()->format('d-M-Y') }}</span></li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-md-flex flex-md-wrap">
+                            <div class="mb-4 mb-md-2 text-left"> <span class="text-muted">Invoice To:</span>
+                                <ul class="list list-unstyled mb-0">
+                                    <li>
+                                        <h5 class="my-2">{{ $heading->fname." ".$heading->mname." ".$heading->lname }}</h5>
+                                    </li>
+                                    <li>Driving License No. : {{ $heading->driving_license }}</li>
+                                    <li>Sex : {{ $heading->gender }}</li>
+                                    <li>Address : {{ $heading->address }}</li>
+                                    <li>Province & district : {{ $heading->province.", ".$heading->district }}</li>
+                                    <li>Email : {{ $heading->email }}</li>
+                                    <li>Phone No. : {{ $heading->phone }}</li>
+                                    <li>Occupation : {{ $heading->occupation }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table table-lg">
+                            <thead>
+                                <tr>
+                                    <th>S.N.</th>
+                                    <th>Description</th>
+                                    <th>Registered Date</th>
+                                    <th>Created By</th>
+                                    <th>Fine Amt(Rs.)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $count = 1;
+                                @endphp
+                                @foreach ($dataInfo as $info)
+                                    <tr>
+                                        <td>{{ $count++ }}</td>
+                                        <td>
+                                            <h6 class="mb-0">{{ $info->fine_reason }}</h6> 
+                                            <span class="text-muted">
+                                                Was found riding <label id="challan_values">{{ $info->category }}</label> category vehicle with <label id="challan_values">{{ $info->passenger_no }}</label> passenger/s at <label id="challan_values">{{ $info->time }}</label> in <label id="challan_values">{{ $info->place }}</label>. With regards to vehicle details, the vehicle model was <label id="challan_values">{{ strtolower($info->model) }}</label> and it was <label id="challan_values">{{ strtolower($info->color) }}</label> colored which was having <label id="challan_values">{{ $info->power }}</label> powered <label id="challan_values">{{ $info->engine_no }}</label> engine. 
+                                                @php
+                                                    if($info->disability == 'Yes') {
+                                                        echo "At that time, the person was having health issues like <label id='challan_values'>".strtolower(rtrim($info->health_condition,", "))."</label>.";
+                                                    } else {
+                                                        echo "At that time, the person was in <label id='challan_values'>".strtolower(rtrim($info->health_condition, ", "))."</label> state.";
+                                                    }
+                                                @endphp 
+                                            </span>
+                                        </td>
+                                        <td>{{ Carbon\Carbon::parse($info->created_at)->format('d-M-Y') }}</td>
+                                        <td>{{ $info->traffic_name }}</td>
+                                        <td><span class="font-weight-semibold">{{ $info->fine_amount }}</span></td>
+                                    </tr>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-md-flex flex-md-wrap">
+                            <div class="pt-2 mb-3 wmin-md-400 ml-auto">
+                                <h6 class="mb-3 text-left"><b>Amount to be paid</b></h6>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th class="text-left">Total Receivable : </th>
+                                                <td class="text-right text-dark">
+                                                    <h5 class="font-weight-bold">{{ $total_amount }}</h5>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer"> <span class="text-muted">This is computer generated invoice.</span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-@endsection
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
