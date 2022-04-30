@@ -8,6 +8,7 @@ use App\Http\Controllers\ChallanController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\InvoiceController;
 
 
 Route::post('/admin/check', [AdminController::class, 'check'])->name('admin.check');
@@ -98,3 +99,6 @@ Route::middleware(['challanCheck'])->group(function() {
 Route::post('/challan/load-district', [FrontController::class, 'displayDistrict'])->name('loadDistrict');
 Route::post('/challan/load-categoryDetails', [FrontController::class, 'displayCategoryDetails'])->name('loadCategoryDetails');
 Route::get('/challan/form-submit',[FrontController::class, 'submitChallan'])->name('challanSubmit');
+
+// invoice
+Route::get('/invoice/display', [InvoiceController::class, 'displayInvoice'])->name('invoice');
