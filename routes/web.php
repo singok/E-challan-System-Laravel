@@ -101,4 +101,4 @@ Route::post('/challan/load-categoryDetails', [FrontController::class, 'displayCa
 Route::get('/challan/form-submit',[FrontController::class, 'submitChallan'])->name('challanSubmit');
 
 // invoice
-Route::get('/invoice/display', [InvoiceController::class, 'displayInvoice'])->name('invoice');
+Route::get('/invoice/generate', [InvoiceController::class, 'generatePDF'])->name('invoice');

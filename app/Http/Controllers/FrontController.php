@@ -88,7 +88,7 @@ class FrontController extends Controller
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Basic example">
                                                             <a href="'.route('invoice', ['driving_license' => $data->driving_license]).'">
-                                                                <button type="button" class="printable-search">Show invoice</button>
+                                                                <button type="button" class="printable-search">Download</button>
                                                             </a>
                                                         </div>
                                                     </td>

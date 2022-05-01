@@ -79,9 +79,9 @@ use Illuminate\Support\Facades\Session;
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a href="#"><button
+                                                <a href="{{ route('invoice', ['driving_license' => $info->driving_license]) }}"><button
                                                         type="button"
-                                                        class="btn btn-primary btn-rounded btn-fw">Show more</button></a>
+                                                        class="btn btn-primary btn-rounded btn-fw">Download</button></a>
                                                 <a href="{{ route('admin.challan-delete', ['license' => $info->driving_license]) }}"><button
                                                         type="button" class="btn btn-danger btn-rounded btn-fw">Delete</button></a>
                                             </div>
