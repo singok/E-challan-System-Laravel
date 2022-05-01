@@ -13,7 +13,7 @@ class ChallanController extends Controller
     {
         $search = $request['search'] ?? "";
         if($search == "") {
-            $data = DB::table('challan')->select('driving_license', 'fname','mname','lname','address','province','phone')->distinct('driving_license')->SimplePaginate(5);
+            $data = DB::table('challan')->select('driving_license', 'fname','mname','lname','address','province','phone')->distinct('driving_license', 'fname','mname','lname','address','province','phone')->SimplePaginate(5);
         } else {
             $data = Challan::where('driving_license', 'LIKE', "%$search%")->orwhere('fname', 'LIKE', "%$search%")->orwhere('phone', 'LIKE', "%$search%")->SimplePaginate(5);
         }

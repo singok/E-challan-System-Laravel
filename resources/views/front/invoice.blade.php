@@ -44,14 +44,14 @@
             padding: 0;
         }
         .blank {
-            width: 70%;
+            width: 65%;
             float: left;
             height: 30px;
         }
         .receivable {
             margin-top: 10px;
             float: left;
-            width: 30%;
+            width: 35%;
             height: 30px;
             font-size: 16px;
         }
@@ -153,7 +153,7 @@
 
     <div class="blank"></div>
     <div class="receivable">
-        Total Amount to be paid : <b>{{ $total_amount }}</b>
+        Total Amount to be paid (Rs) : <b>{{ $total_amount }}</b>
     </div>  
     
     <div class="footer">This is computer generated invoice.</div> 
