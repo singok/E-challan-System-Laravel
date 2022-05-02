@@ -42,7 +42,7 @@ class TrafficController extends Controller
     {
         $policeCount = TrafficPolice::count();
         $rulesCount = TrafficRules::count();
-        $challanCount = Challan::count();
+        $challanCount = Challan::select('driving_license')->distinct('driving_license')->count();
         $trashPoliceCount = TrafficPolice::onlyTrashed()->count();
         $trashRulesCount = TrafficRules::onlyTrashed()->count();
         return view('pages.dashboard-home',['totalPolice' => $policeCount, 'totalRules' => $rulesCount, 
