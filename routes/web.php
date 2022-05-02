@@ -110,11 +110,17 @@ use App\Notifications\PaymentNotification;
 Route::get('/notify', function () {
 
     $user = Admin::find(1);
-    $fname = "Kajan";
-    $mname = "Bahadur";
-    $lname = "Rai";
-    $license = "23-34-4545453";
-    $amount = "1500";
+    $fname = "Suraj";
+    $mname = "";
+    $lname = "Singok";
+    $license = "23-34-4543453";
+    $amount = "1000";
     Admin::find(1)->notify(new PaymentNotification($fname, $mname, $lname, $license, $amount));
     return redirect()->route('admin.dashboard');
 });
+
+Route::get('/notification/merkasRead', function () {
+    $user = Admin::find(1);
+    $user->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('notificationMark');

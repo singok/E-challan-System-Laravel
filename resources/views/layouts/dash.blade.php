@@ -72,43 +72,48 @@
               </ul>
               <ul class="navbar-nav navbar-nav-right">
                 <li class="nav-item dropdown">
+                    @php
+                        use App\Models\Admin;
+
+                        $user = Admin::find(1);
+                    @endphp
                   <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                     <i class="icon-bell mx-0"></i>
-                    <span class="badge badge-info">4</span>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                    <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+                    
+                    @if ($user->unreadNotifications->count())
+                        <span class="badge badge-info">{{ $user->unreadNotifications->count() }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                        <p class="mb-0 font-weight-normal float-left dropdown-header" style="font-size: 16px;">Notifications</p>
+                        <a class="mb-0 font-weight-normal float-right dropdown-header" style="color:red;" href="{{ route('notificationMark') }}">Mark all as Read</a><br>
+                        <hr>
+                        
     
-                    <!--
-                    <a class="dropdown-item preview-item">
-                      <div class="preview-thumbnail">
-                        <div class="preview-icon bg-warning">
-                          <i class="ti-settings mx-0"></i>
+                        <!-- Unread Notification goes here -->
+                        @foreach ($user->unreadNotifications as $notification)
+                            <div class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-info" style="height: 15px; width:15px;">
+                        
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <h6 class="preview-subject font-weight-light">{{ $notification->data['full_name'] }}</h6>
+                                    <p class="font-weight-light small-text mb-0 text-muted">
+                                        Having driving license no. <span style="font-weight:bold;">{{ $notification->data['driving_license'] }}</span> has paid fine amount of Rs.<span style="font-weight:bold">{{ $notification->data['amount_paid'] }}</span>.
+                                    </p>
+                                </div>
+                            </div>
+                        @endforeach
+    
                         </div>
-                      </div>
-                      <div class="preview-item-content">
-                        <h6 class="preview-subject font-weight-normal">Settings</h6>
-                        <p class="font-weight-light small-text mb-0 text-muted">
-                          Private message
-                        </p>
-                      </div>
-                    </a>
-                    <a class="dropdown-item preview-item">
-                      <div class="preview-thumbnail">
-                        <div class="preview-icon bg-info">
-                          <i class="ti-user mx-0"></i>
+                    @else
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                            <p class="mb-0 font-weight-normal float-left dropdown-header">No notifications.</p>
                         </div>
-                      </div>
-                      <div class="preview-item-content">
-                        <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                        <p class="font-weight-light small-text mb-0 text-muted">
-                          2 days ago
-                        </p>
-                      </div>
-                    </a>
-
-                -->
-                  </div>
+                    @endif
+                  
                 </li>
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
@@ -189,7 +194,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.trash') }}">
                             <i class="icon-box menu-icon"></i>
-                            <i class="mdi mdi-delete-variant"></i>
                             <span class="menu-title">Trash bin</span>
                         </a>
                     </li>
