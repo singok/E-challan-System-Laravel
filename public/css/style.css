@@ -146,9 +146,3 @@
 #login-blue:hover {
     color:rgb(24, 175, 87);
 }
-
-/* challan values */
-#challan_values {
-    font-style: italic;
-    font-weight: bold;
-}

@@ -108,7 +108,6 @@ Route::get('/invoice/generate', [InvoiceController::class, 'generatePDF'])->name
 use App\Notifications\PaymentNotification;
 // notification
 Route::get('/notify', function () {
-
     $user = Admin::find(1);
     $fname = "Suraj";
     $mname = "";
@@ -116,7 +115,7 @@ Route::get('/notify', function () {
     $license = "23-34-4543453";
     $amount = "1000";
     Admin::find(1)->notify(new PaymentNotification($fname, $mname, $lname, $license, $amount));
-    return redirect()->route('admin.dashboard');
+    return redirect()->back();
 });
 
 Route::get('/notification/merkasRead', function () {
