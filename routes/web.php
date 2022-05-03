@@ -123,3 +123,25 @@ Route::get('/notification/merkasRead', function () {
     $user->unreadNotifications->markAsRead();
     return redirect()->back();
 })->name('notificationMark');
+
+// Payment Page
+Route::get('/payment', function () {
+    return view('front.payment');
+})->name('paymentpage');
+
+use Illuminate\Http\Request;
+use Twilio\Rest\Client;
+Route::post('/sms', function (Request $request) {
+
+    try {
+        $client = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
+        $client->messages->create('+977'.$request->phone, [
+            'from' => env('TWILIO_FROM'),
+            'body' => 'Your Account has been debited by NPR '.$request->amount.' on '.Carbon\Carbon::now()->format('d-M-Y').', Remarks: '.$request->remarks.' E-CHALLAN'
+        ]);
+
+        return redirect()->back();
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+})->name('sms');
