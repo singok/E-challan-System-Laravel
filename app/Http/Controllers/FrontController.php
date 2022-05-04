@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Province;
 use App\Models\Vehicle;
 use App\Models\TrafficPolice;
+use App\Models\ResetPassword;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TrafficReset;
+use Illuminate\Support\Facades\Session;
 
 class FrontController extends Controller
 {
@@ -323,7 +328,7 @@ class FrontController extends Controller
         ]);
 
         // email exists or not
-        $user = TrafficPolice::firstWhere('email', $request->email);
+        $user = DB::table('trafficpolice')->where('email', $request->email)->first();
 
         if($user) {
 
@@ -374,10 +379,8 @@ class FrontController extends Controller
         $newPass = Hash::make($request['pass1']);
 
         // update new password
-        $user = TrafficPolice::firstWhere('email', session('trafficEmail'));
-        $user->password = $newPass;
-        $user->save();
-
+        $user = DB::table('trafficpolice')->where('email', '=', session('trafficEmail'))->update(['user_password' => $newPass]);
+        
         if($user) {
             // Remove tokens from reset_password table
             ResetPassword::where('email', session('trafficEmail'))->delete();
@@ -389,5 +392,6 @@ class FrontController extends Controller
         } else {
             return back()->with('failure', 'Something went wrong !');
         }
+        
     }
 }

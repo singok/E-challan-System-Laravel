@@ -29,6 +29,11 @@
       <label for="formGroupExampleInput" class="form-label">Please provide a valid email address where you will receive an email with a link.</label>
       <input type="text" class="form-control" id="formGroupExampleInput" name="email" placeholder="Email Address">
     </div>
+    <div class="alert-danger">
+      @error('email')
+          {{ $message }}
+      @enderror
+    </div>
     <button type="submit">Send a Reset Link</button>
     <div class="mt-3">
       <a href="{{ route('adminlogin') }}" class="admin-login">Admin Login</a>
