@@ -10,6 +10,7 @@ use App\Models\Challan;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Province;
 use App\Models\Vehicle;
+use App\Models\TrafficPolice;
 
 class FrontController extends Controller
 {
@@ -310,6 +311,83 @@ class FrontController extends Controller
             // destroy session
             session()->pull('username');
             return redirect()->route('trafficlogin');
+        }
+    }
+
+    // get traffic password reset link
+    function getPasswordLink(Request $request)
+    {
+        // validate
+        $request->validate([
+            'email' => 'required | email'
+        ]);
+
+        // email exists or not
+        $user = TrafficPolice::firstWhere('email', $request->email);
+
+        if($user) {
+
+            // code generate
+            $code = Str::random(200);
+
+            if(ResetPassword::firstWhere('email', $user->email)) {
+                return back()->with('failure', "We have already sent you a link. Please check your email !");
+            } else {
+                ResetPassword::create([
+                    'email' => $user->email,
+                    'code' => $code
+                ]);
+
+                Mail::to($request->email)->send(new TrafficReset($user->email, $code));
+                return back()->with('success', "We have sent you a link. Please check your email !");
+            }
+        } else {
+            return back()->with('failure', "Couldn't recognize the email !");
+        }
+    }
+
+    // get traffic reset form
+    function getTrafficResetForm(Request $request)
+    {
+        $request->session()->put('trafficEmail', $request->email);
+        $code = $request->token;
+
+        $info = ResetPassword::where('email', session('trafficEmail'))->where('code', $code)->get(['code']);
+
+        if($info) {
+            return view('auths.setupTrafficNewPassword');
+        } else {
+            echo "<h2>Sorry, We couldn't find your details</h2>";
+        }
+    }
+
+    // update new password for traffic
+    function updatePassword(Request $request)
+    {
+        // validate
+        $request->validate([
+            'pass1' => 'required',
+            'pass2' => 'required | same:pass1'
+        ]);
+
+        // hashing
+        $newPass = Hash::make($request['pass1']);
+
+        // update new password
+        $user = TrafficPolice::firstWhere('email', session('trafficEmail'));
+        $user->password = $newPass;
+        $user->save();
+
+        if($user) {
+            // Remove tokens from reset_password table
+            ResetPassword::where('email', session('trafficEmail'))->delete();
+
+            // session destroy
+            session()->pull('trafficEmail');
+
+            return back()->with('success', 'You have successfully updated your password ! You can close this window.');
+        } else {
+            return back()->with('failure', 'Something went wrong !');
         }
     }
 }

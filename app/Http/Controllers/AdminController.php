@@ -14,19 +14,14 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    // display login page
-    function login()
-    {
-        return view('auths.login');
-    }
-
+    
     // administrator check
     function check(Request $request)
     {
         // validate
         $request->validate([
             'email' => 'required | email',
-            'password' => 'required | min:5 | max:15'
+            'password' => 'required'
          ]);
 
          // check
@@ -51,12 +46,6 @@ class AdminController extends Controller
             session()->pull('userid');
             return redirect()->route('adminlogin');
         }
-    }
-
-    // input email
-    function giveEmail()
-    {
-        return view('auths.emailInput');
     }
 
     // get a password reset link
@@ -87,7 +76,7 @@ class AdminController extends Controller
                 return back()->with('success', "We have sent you a link. Please check your email !");
             }
         } else {
-            return back()->with('failure', "Couldn't recognized the email !");
+            return back()->with('failure', "Couldn't recognize the email !");
         }
     }
 
@@ -101,18 +90,18 @@ class AdminController extends Controller
         $info = ResetPassword::where('email', session('email'))->where('code', $code)->get(['code']);
 
         if($info) {
-            return view('auths.updateForm');
+            return view('auths.setupNewPassword');
         } else {
             echo "<h2>Sorry, We couldn't find your details</h2>";
         }
     }
 
-    // update password
+    // update password from reset form
     function update(Request $request)
     {
         // validate
         $request->validate([
-            'pass1' => 'required | min:5 | max:15',
+            'pass1' => 'required',
             'pass2' => 'required | same:pass1'
         ]);
 

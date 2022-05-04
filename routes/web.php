@@ -14,15 +14,22 @@ use App\Models\Admin;
 
 Route::post('/admin/check', [AdminController::class, 'check'])->name('admin.check');
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-Route::get('/admin/forgetpassword', [AdminController::class, 'giveEmail'])->name('admin.forgetpassword');
 Route::post('/admin/passwordlink', [AdminController::class, 'getLink'])->name('admin.passwordlink');
-Route::get('/admin/reset/{email}/{token}', [AdminController::class, 'getResetForm']);
-Route::post('/admin/update', [AdminController::class, 'update'])->name('admin.setNewPassword');
+
+// admin password reset form 
+Route::get('/password/reset/{email}/{token}', [AdminController::class, 'getResetForm']);
+Route::post('/password/update', [AdminController::class, 'update'])->name('admin.setNewPassword');
+
+// traffic password reset form
+Route::post('/traffic/passwordlink', [FrontController::class, 'getPasswordLink'])->name('traffic.passwordlink');
+Route::get('/password/traffic/reset/{email}/{token}', [FrontController::class, 'getTrafficResetForm']);
+Route::post('/password/traffic/update', [FrontController::class, 'updatePassword'])->name('traffic.setNewPassword');
+
 Route::get('/admin/setting/show', [AdminController::class, 'showSetting'])->name('admin.setting');
 Route::post('/admin/setting/update', [AdminController::class, 'updateAdminSetting'])->name('admin.setting-update');
 
 Route::middleware(['authCheck'])->group(function () {
-    //Route::get('/', [AdminController::class, 'login'])->name('admin.login');
+    Route::get('/admin-login', [FrontController::class, 'adminLogin'])->name('adminlogin');
     Route::get('/admin/dashboard', [TrafficController::class, 'dashboard'])->name('admin.dashboard');
 });
 
@@ -84,7 +91,6 @@ Route::get('/admin/traffic/challan-delete/{license}', [ChallanController::class,
 Route::get('/', [FrontController::class, 'rulePage'])->name('rulepage');
 Route::get('/verification', [FrontController::class, 'verificationPage'])->name('verificationpage');
 Route::get('/traffic-login', [FrontController::class, 'trafficLogin'])->name('trafficlogin');
-Route::get('/admin-login', [FrontController::class, 'adminLogin'])->name('adminlogin');
 Route::get('/admin-password-forget', [FrontController::class, 'adminForget'])->name('adminforget');
 Route::get('/traffic-password-forget', [FrontController::class, 'trafficForget'])->name('trafficforget');
 
