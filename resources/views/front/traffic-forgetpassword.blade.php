@@ -1,3 +1,8 @@
+@php
+  use Illuminate\Support\Facades\Session;
+@endphp
+
+
 @extends('layouts.frontLayout')
 
 @section('title')

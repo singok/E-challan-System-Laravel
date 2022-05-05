@@ -57,7 +57,7 @@ class PaymentController extends Controller
 
             // send notification to Administrator
             Admin::find(1)->notify(new PaymentNotification($name, $license, $amount));
-            return redirect()->back();
+            return back()->with('success', "Thank you for your successful payment !");
 
         } catch (Exception $e) {
             return $e->getMessage();

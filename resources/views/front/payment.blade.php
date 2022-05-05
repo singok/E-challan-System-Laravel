@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Session;
+@endphp
+
 @extends('layouts.frontLayout')
 
 @section('title')
@@ -7,6 +11,15 @@
 @section('content')
 
 <form action="{{ route('payment') }}" method="POST">
+    @if (Session::get('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+    </div>
+    @elseif(Session::get('failure'))
+      <div class="alert alert-danger">
+          {{ Session::get('failure') }}
+      </div>
+    @endif
     @csrf
     <div class="main-body bg-light d-md-flex align-items-center"> 
             <div class="main-box box1 shadow-sm p-md-5 p-md-5 p-4"> 
