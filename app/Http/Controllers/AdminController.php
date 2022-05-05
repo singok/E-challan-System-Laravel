@@ -48,7 +48,7 @@ class AdminController extends Controller
         }
     }
 
-    // get a password reset link
+    // get a password reset link for ADMIN
     function getLink(Request $request)
     {
         // validate
