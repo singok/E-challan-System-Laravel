@@ -10,6 +10,9 @@
   <title>@yield('title')</title>
 
   <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}">
+  
+  <link type="text/css" rel="stylesheet" href="{{ asset('css/payment.css') }}">
+
   <link rel="icon" type="image/x-icon" href="{{ asset('images/fornt-logo/nepal-govt.png') }}">
 
   <!-- Bootstrap CSS -->

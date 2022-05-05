@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Carbon\Carbon;
 
 class PaymentNotification extends Notification
 {
@@ -20,9 +21,9 @@ class PaymentNotification extends Notification
     public $license;
     public $fullname;
     public $amount;
-    public function __construct($fname, $mname, $lname, $license, $amount)
+    public function __construct($name, $license, $amount)
     {
-        $this->fullname = $fname." ".$mname." ".$lname;
+        $this->fullname = $name;
         $this->license = $license;
         $this->amount = $amount;
     }
@@ -63,7 +64,8 @@ class PaymentNotification extends Notification
         return [
             'full_name' => $this->fullname,
             'driving_license' => $this->license,
-            'amount_paid' => $this->amount
+            'amount_paid' => $this->amount,
+            'paid_at' => Carbon::now()->format('d-M-Y')
         ];
     }
 }

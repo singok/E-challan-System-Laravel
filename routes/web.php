@@ -9,7 +9,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\InvoiceController;
-use App\Models\Admin;
+use App\Http\Controllers\PaymentController;
 
 
 Route::post('/admin/check', [AdminController::class, 'check'])->name('admin.check');
@@ -110,44 +110,7 @@ Route::get('/challan/form-submit',[FrontController::class, 'submitChallan'])->na
 // invoice
 Route::get('/invoice/generate', [InvoiceController::class, 'generatePDF'])->name('invoice');
 
-
-use App\Notifications\PaymentNotification;
 // notification
-Route::get('/notify', function () {
-    $user = Admin::find(1);
-    $fname = "Suraj";
-    $mname = "";
-    $lname = "Singok";
-    $license = "23-34-4543453";
-    $amount = "1000";
-    Admin::find(1)->notify(new PaymentNotification($fname, $mname, $lname, $license, $amount));
-    return redirect()->back();
-});
-
-Route::get('/notification/merkasRead', function () {
-    $user = Admin::find(1);
-    $user->unreadNotifications->markAsRead();
-    return redirect()->back();
-})->name('notificationMark');
-
-// Payment Page
-Route::get('/payment', function () {
-    return view('front.payment');
-})->name('paymentpage');
-
-use Illuminate\Http\Request;
-use Twilio\Rest\Client;
-Route::post('/sms', function (Request $request) {
-
-    try {
-        $client = new Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
-        $client->messages->create('+977'.$request->phone, [
-            'from' => env('TWILIO_FROM'),
-            'body' => 'Your Account has been debited by NPR '.$request->amount.' on '.Carbon\Carbon::now()->format('d-M-Y').', Remarks: '.$request->remarks.' E-CHALLAN'
-        ]);
-
-        return redirect()->back();
-    } catch (Exception $e) {
-        return $e->getMessage();
-    }
-})->name('sms');
+Route::get('/notification/merkasRead', [PaymentController::class, 'markRead'])->name('notificationMark');
+Route::get('/payment', [PaymentController::class, 'displayPayment'])->name('paymentpage');
+Route::post('/payment-notification', [PaymentController::class, 'paymentMake'])->name('payment');

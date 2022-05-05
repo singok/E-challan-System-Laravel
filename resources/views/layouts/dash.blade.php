@@ -100,7 +100,7 @@
                                 <div class="preview-item-content">
                                     <h6 class="preview-subject font-weight-light">{{ $notification->data['full_name'] }}</h6>
                                     <p class="font-weight-light small-text mb-0 text-muted">
-                                        Having driving license no. <span style="font-weight:bold;">{{ $notification->data['driving_license'] }}</span> has paid fine amount of Rs.<span style="font-weight:bold">{{ $notification->data['amount_paid'] }}</span>.
+                                        Having driving license no. <span style="font-weight:bold;">{{ $notification->data['driving_license'] }}</span> has paid fine amount of Rs.<span style="font-weight:bold">{{ $notification->data['amount_paid'] }}</span> on <span style="font-weight:bold">{{ $notification->data['paid_at'] }}</span>.
                                     </p>
                                 </div>
                             </div>
