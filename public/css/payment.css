@@ -10,7 +10,7 @@
 .main-box.box1 {
     width: 400px;
     height: 550px;
-    background-color: #0c0a6b;
+    background-color: #17006b;
     color: #ffffff;
     border-radius: 0;
 }
@@ -77,11 +77,6 @@
 .nav.nav-tabs .nav-item .nav-link:hover {
     border-bottom: 2px solid #3ecc6d;
     color: #05cf48
-}
-
-.nav.nav-tabs .nav-item .nav-link.active {
-    border: none;
-    border-bottom: 2px solid #3ecc6d
 }
 
 .payment-input {
@@ -167,6 +162,7 @@ img {
 #payment-form .btn.btn-primary:hover {
     background-color: #42a147
 }
+
 
 @media (max-width:750px) {
     .main-body {

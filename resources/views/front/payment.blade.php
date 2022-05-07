@@ -80,10 +80,10 @@
                 </div> 
                 <ul class="nav nav-tabs mb-3 px-md-4 px-2"> 
                     <li class="nav-item"> 
-                        <a class="nav-link px-2 active" aria-current="page" href="#">Credit Card</a> 
+                        <a class="nav-link px-2 first" id="creditCard" href="#" aria-current="page">Credit Card</a> 
                     </li> 
                     <li class="nav-item"> 
-                        <a class="nav-link px-2" href="#">Mobile Payment</a> 
+                        <a href="#" class="nav-link px-2 second" id="mobilePayment">Mobile Payment</a> 
                     </li> 
                 </ul>  
                 <div id="payment-form"> 
@@ -168,8 +168,43 @@
                         </div> 
                     </div> 
                 </div> 
+                <div id="mobile-form" style="display:none;">
+                    <div class="row"> 
+                        <div class="col-12"> 
+                            <div class="d-flex flex-column px-md-5 px-4 mb-4"> 
+                                <span style="text-align: center;font-weight:bold;">Scan to Pay on Merchant outlets</span>
+                                <div class="qrCode my-2">
+                                    QR-CODE goes here
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
     </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+        
+        // mobile payment
+        $('#mobilePayment').on('click', function () {
+            $('#payment-form').css('display','none');
+            $('#mobile-form').css('display','block');
+            $('.nav.nav-tabs .nav-item .nav-link.first').removeAttr('style');
+            $('.nav.nav-tabs .nav-item .nav-link.second').css({'border':'none','border-bottom': '2px solid #3ecc6d'});
+        });
+
+        // credit payment
+        $('#creditCard').on('click', function () {
+            $('#mobile-form').css('display','none');
+            $('#payment-form').css('display','block');
+            $('.nav.nav-tabs .nav-item .nav-link.second').removeAttr('style');
+            $('.nav.nav-tabs .nav-item .nav-link.first').css({'border':'none','border-bottom': '2px solid #3ecc6d'});
+        });
+
+
+    });
+</script>
 
 @endsection

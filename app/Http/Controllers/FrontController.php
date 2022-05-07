@@ -42,6 +42,7 @@ class FrontController extends Controller
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title" style="color:blue;"><u><b>Challan Details</b></u></h4>
+                                
                                 <p class="card-description">
                                     <i>Please, kindly visit the office along with the hard copy of this invoice.</i>
                                 </p>
