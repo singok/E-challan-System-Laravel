@@ -318,13 +318,16 @@
                   </div>
                   <div class="row g-3 py-2">
                     <div class="col-md-12">
-                      <label for="inputPoliceGate" class="form-label">Police Gate <span style="color:red;">*</span></label>
-                      <select id="inputPoliceGate" class="form-select" name="policeGate">
+                      <label for="inputPoliceGate" class="form-label">Traffic Checkpost</label> <span style="color:red;">*</span></label>
+                      <select id="inputPoliceGate" class="form-select" name="checkpost">
                         <option value="" selected>Choose...</option>
-                        <option value="Chabahil">Chabahil</option>
+                        @foreach ($dataCheckpost as $data)
+                          <option value="{{ $data->checkpost }}">{{ $data->checkpost }}</option>
+                        @endforeach
+                        
                       </select>
                       <div class="alert-danger">
-                        @error('policeGate')
+                        @error('checkpost')
                             {{ $message }}
                         @enderror
                       </div>

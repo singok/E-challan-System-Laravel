@@ -10,7 +10,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
-
+use App\Http\Controllers\CheckpostController;
 
 Route::post('/admin/check', [AdminController::class, 'check'])->name('admin.check');
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
@@ -106,6 +106,14 @@ Route::middleware(['challanCheck'])->group(function() {
 Route::post('/challan/load-district', [FrontController::class, 'displayDistrict'])->name('loadDistrict');
 Route::post('/challan/load-categoryDetails', [FrontController::class, 'displayCategoryDetails'])->name('loadCategoryDetails');
 Route::get('/challan/form-submit',[FrontController::class, 'submitChallan'])->name('challanSubmit');
+
+// checkpost
+Route::get('/admin/checkpost', [CheckpostController::class, 'checkpost'])->name('admin.checkpost');
+Route::post('/admin/checkpost-add', [CheckpostController::class, 'addCheckpost'])->name('admin.checkpost-add');
+Route::get('/admin/checkpost/display', [CheckpostController::class, 'listCheckpost'])->name('admin.checkpost-show');
+Route::get('/admin/checkpost/delete/{id}', [CheckpostController::class, 'deleteCheckpost'])->name('admin.checkpost-delete-permanently');
+Route::get('/admin/checkpost/updateform/{id}', [CheckpostController::class, 'updateForm'])->name('admin.checkpost-detail-update');
+Route::post('/admin/checkpost/updateChallan/{id}', [CheckpostController::class, 'checkpostUpdate'])->name('checkpost_details_update');
 
 // invoice
 Route::get('/invoice/generate', [InvoiceController::class, 'generatePDF'])->name('invoice');

@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TrafficReset;
 use Illuminate\Support\Facades\Session;
+use App\Models\Checkpost;
 
 class FrontController extends Controller
 {
@@ -134,7 +135,10 @@ class FrontController extends Controller
         // get rules data
         $rulesData = TrafficRules::select('rule_description')->get();
 
-        return view('front.challan', ['dataInfo' => $provinceData, 'vehicleInfo' => $vehicleData, 'rulesInfo' => $rulesData]);
+        // get traffic checkpost data
+        $checkpostInfo = Checkpost::select('checkpost')->get();
+
+        return view('front.challan', ['dataInfo' => $provinceData, 'vehicleInfo' => $vehicleData, 'rulesInfo' => $rulesData, 'dataCheckpost' => $checkpostInfo]);
     }
 
     // challan details insert
@@ -161,7 +165,7 @@ class FrontController extends Controller
             'passengerCount' => 'required',
             'place' => 'required',
             'time' => 'required',
-            'policeGate' => 'required',
+            'checkpost' => 'required',
             'reason' => 'required'
         ]);
         
@@ -200,7 +204,7 @@ class FrontController extends Controller
         $challan->passenger_no = $request->passengerCount;
         $challan->place = $request->place;
         $challan->time = $request->time;
-        $challan->police_brit = $request->policeGate;
+        $challan->police_brit = $request->checkpost;
         $challan->fine_reason = $request->reason;
         
         // fine amount
