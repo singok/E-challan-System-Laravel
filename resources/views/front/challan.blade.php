@@ -20,7 +20,7 @@
     @endif
 <div class="alert alert-info" role="alert">
     Note :- Fields with <span style="color:red;">*</span> are mandatory.
-  </div>
+</div>
   <form action="{{ route('challanSubmit') }}" method="GET">
     @csrf
     <div class="row g-3">

@@ -52,6 +52,9 @@
             <li class="nav-item"><a href="{{ route('verificationpage') }}" class="nav-link link-dark px-2">Verification</a></li>
             <li class="nav-item"><a href="{{ route('challanpage') }}" class="nav-link link-dark px-2">Challan</a></li>
             <li class="nav-item"><a href="{{ route('paymentpage') }}" class="nav-link link-dark px-2">Payment</a></li>
+            <!--
+            <li class="nav-item"><a href="{{ route('contactpage') }}" class="nav-link link-dark px-2">Contact Us</a></li>
+            -->
           </ul>
           <ul class="nav">
 

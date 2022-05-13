@@ -11,6 +11,7 @@ use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CheckpostController;
+use App\Http\Controllers\ContactController;
 
 Route::post('/admin/check', [AdminController::class, 'check'])->name('admin.check');
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
@@ -122,3 +123,7 @@ Route::get('/invoice/generate', [InvoiceController::class, 'generatePDF'])->name
 Route::get('/notification/merkasRead', [PaymentController::class, 'markRead'])->name('notificationMark');
 Route::get('/payment', [PaymentController::class, 'displayPayment'])->name('paymentpage');
 Route::post('/payment-notification', [PaymentController::class, 'paymentMake'])->name('payment');
+
+// contact page
+Route::get('/contact', [ContactController::class, 'displayPage'])->name('contactpage');
+Route::post('/contact/submit', [ContactController::class, 'submitDetails'])->name('contactSubmit');
