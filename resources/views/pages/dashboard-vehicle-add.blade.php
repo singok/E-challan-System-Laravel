@@ -27,30 +27,5 @@ use Illuminate\Support\Facades\Session;
                         NOTE :- All fields are mandatory.
                     </div>
                     </p>
-                    <form class="forms-sample" method="POST" action="{{ route('admin.vehicle-register') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label for="exampleInputCategory">Category</label>
-                            <input type="text" class="form-control" id="exampleInputCategory" name="category">
-                            <div class="alert-danger">
-                                @error('category')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputDetails">Category Details</label>
-                            <textarea class="form-control" id="exampleInputDetails" rows="4" name="categoryDetails"></textarea>
-                            <div class="alert-danger">
-                                @error('categoryDetails')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+             
 @endsection
