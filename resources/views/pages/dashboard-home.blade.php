@@ -43,5 +43,27 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                    <div class="card card-light-blue">
+                        <div class="card-body">
+                            <p class="mb-4">Total Challans</p>
+                            <p class="fs-30 mb-2">{{ $totalChallans }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 stretch-card transparent">
+                    <div class="card card-light-danger">
+                        <div class="card-body">
+                            <p class="mb-4">Total items in Trash</p>
+                            <p class="fs-30 mb-2">{{ $trashPolice + $trashRules }}</p>
+                            <p>Traffic Police ({{ $trashPolice }})</p>
+                            <p>Traffic Rules ({{ $trashRules }})</p>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
